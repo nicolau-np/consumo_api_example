@@ -68,13 +68,13 @@ class _CreatesState extends State<Creates> {
   }
 
   void store(EstudanteProvider estudanteProvider) {
-    final newEstudante = Estudante(
+   /* final newEstudante = Estudante(
       id: 0,
       turma: turma.text,
       pessoa: Pessoa(id: 0, nome: nome.text, genero: genero.text),
     );
 
     estudanteProvider.addEstudante(newEstudante);
-    Navigator.pop(context);
+    Navigator.pop(context);*/
   }
 }
