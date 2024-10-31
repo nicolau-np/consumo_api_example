@@ -16,15 +16,17 @@ class Edit extends StatefulWidget {
 class _EditState extends State<Edit> {
   int id = 0;
   TextEditingController nome = TextEditingController();
-  TextEditingController genero = TextEditingController();
-  TextEditingController turma = TextEditingController();
+  String? turmaSelecionada;
+  String? generoSelecionado;
+  final List<String> turmas = ['Turma A', 'Turma B', 'Turma C', 'Turma D'];
+  final List<String> generos = ['Masculino', 'Femenino'];
 
   @override
   void initState() {
     id = widget.estudante.id;
     nome.text = widget.estudante.pessoa.nome;
-    genero.text = widget.estudante.pessoa.genero;
-    turma.text = widget.estudante.turma;
+    turmaSelecionada = widget.estudante.turma;
+    generoSelecionado = widget.estudante.pessoa.genero;
     super.initState();
   }
 
@@ -48,22 +50,56 @@ class _EditState extends State<Edit> {
           const SizedBox(
             height: 16.0,
           ),
-          TextFormField(
+          DropdownButtonFormField<String>(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              label: Text('Genero'),
+              labelText: 'Gênero',
             ),
-            controller: genero,
+            value: generoSelecionado,
+            items: generos.map((genero) {
+              return DropdownMenuItem<String>(
+                value: genero,
+                child: Text(genero),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                generoSelecionado = value;
+              });
+            },
+            validator: (value) {
+              if (value == null) {
+                return 'Selecione um Gênero';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 16.0,
           ),
-          TextFormField(
+          DropdownButtonFormField<String>(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              label: Text('Turma'),
+              labelText: 'Turma',
             ),
-            controller: turma,
+            value: turmaSelecionada,
+            items: turmas.map((turma) {
+              return DropdownMenuItem<String>(
+                value: turma,
+                child: Text(turma),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+                turmaSelecionada = value;
+              });
+            },
+            validator: (value) {
+              if (value == null) {
+                return 'Selecione uma turma';
+              }
+              return null;
+            },
           ),
           const SizedBox(
             height: 16.0,
@@ -82,10 +118,34 @@ class _EditState extends State<Edit> {
   void update(EstudanteProvider estudanteProvider, int id) async {
     final newEstudante = Estudante(
       id: id,
-      turma: turma.text,
-      pessoa: Pessoa(id: 0, nome: nome.text, genero: genero.text),
+      turma: turmaSelecionada.toString(),
+      pessoa:
+          Pessoa(id: 0, nome: nome.text, genero: generoSelecionado.toString()),
     );
 
-    await estudanteProvider.updateEstudante(newEstudante);
+    if (nome.text.isEmpty ||
+        generoSelecionado == null ||
+        turmaSelecionada == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Deve preencher os campos obrigatórios.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    } else {
+      await estudanteProvider.updateEstudante(newEstudante);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Feito com sucesso'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void clearFields() {
+    nome.clear();
+    generoSelecionado = null;
+    turmaSelecionada = null;
   }
 }
