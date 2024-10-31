@@ -10,7 +10,6 @@ class EstudanteService {
     final response = await http.get(Uri.parse('$baseUrl/estudantes'));
 
     if (response.statusCode == 200) {
-      print(response.body);
       List<dynamic> json = jsonDecode(response.body);
       return json.map((estudante) => Estudante.fromJson(estudante)).toList();
     } else {
@@ -22,7 +21,7 @@ class EstudanteService {
     await http.post(
       Uri.parse('$baseUrl/estudantes'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(estudante.toJson()),
+      body: jsonEncode(estudante.toJsonEstundante()),
     );
   }
 

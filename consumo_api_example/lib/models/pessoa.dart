@@ -20,4 +20,9 @@ class Pessoa {
       'genero': genero,
     };
   }
+
+  @override
+  String toString() {
+    return 'Pessoa{id: $id, nome: $nome, genero: $genero}';
+  }
 }

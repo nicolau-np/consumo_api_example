@@ -22,4 +22,17 @@ class Estudante {
       'pessoa': pessoa.toJson(),
     };
   }
+
+  Map<String, dynamic> toJsonEstundante() {
+    return {
+      'nome': pessoa.nome,
+      'genero': pessoa.genero,
+      'turma': turma,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Estudante{id: $id, turma: $turma, pessoa: $pessoa}';
+  }
 }

@@ -2,7 +2,6 @@ import 'package:consumo_api_example/models/estudante.dart';
 import 'package:consumo_api_example/services/estudante_service.dart';
 import 'package:flutter/material.dart';
 
-
 class EstudanteProvider with ChangeNotifier {
   List<Estudante> _estudantes = [];
   final EstudanteService estudanteService;

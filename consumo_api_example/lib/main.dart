@@ -14,10 +14,17 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
-  @override
+   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => EstudanteProvider(EstudanteService()),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => EstudanteProvider(EstudanteService()),
+          // Adicione mais providers aqui
+        ),
+        // Exemplo de outro provider
+        // ChangeNotifierProvider(create: (context) => OutroProvider()),
+      ],
       child: MaterialApp(
         title: 'Consumo API',
         theme: ThemeData(
@@ -28,11 +35,9 @@ class MyApp extends StatelessWidget {
         initialRoute: '/index',
         routes: {
           '/': (context) => const HomePage(),
-          /*'/create': (context) => const CreatePage(),
-          '/index': (context) => const IndexPage(),
-          '/login': (context) => const LoginPage(),*/
-          '/create':(context)=> const Creates(),
+          '/create': (context) => const Creates(),
           '/index': (context) => const Index(),
+          // Adicione mais rotas conforme necessário
         },
       ),
     );

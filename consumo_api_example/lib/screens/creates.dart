@@ -68,19 +68,13 @@ class _CreatesState extends State<Creates> {
   }
 
   void store(EstudanteProvider estudanteProvider) async {
-  try {
-    final newEstudante = Estudante(
+  final newEstudante = Estudante(
       id: 0,
       turma: turma.text,
       pessoa: Pessoa(id: 0, nome: nome.text, genero: genero.text),
     );
 
     await estudanteProvider.addEstudante(newEstudante);
-    Navigator.pop(context); 
-  } catch (e) {
-    // Aqui você pode exibir um SnackBar ou um AlertDialog com o erro
-    print('Erro ao adicionar estudante: $e');
-  }
 }
 
 }
