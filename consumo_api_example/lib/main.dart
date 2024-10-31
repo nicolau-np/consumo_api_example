@@ -2,7 +2,7 @@ import 'package:consumo_api_example/provider/estudante_provider.dart';
 import 'package:consumo_api_example/screens/creates.dart';
 import 'package:consumo_api_example/screens/index.dart';
 import 'package:consumo_api_example/services/estudante_service.dart';
-import 'package:consumo_api_example/view/home_page.dart';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -32,11 +32,10 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: '/index',
+        initialRoute: '/',
         routes: {
-          '/': (context) => const HomePage(),
+          '/': (context) => const Index(),
           '/create': (context) => const Creates(),
-          '/index': (context) => const Index(),
           // Adicione mais rotas conforme necessário
         },
       ),

@@ -1,4 +1,5 @@
 import 'package:consumo_api_example/provider/estudante_provider.dart';
+import 'package:consumo_api_example/screens/edit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +41,12 @@ class _IndexState extends State<Index> {
                       IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: () {
-                          // Implementar lógica de edição
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Edit(estudante),
+                            ),
+                          );
                         },
                       ),
                       IconButton(

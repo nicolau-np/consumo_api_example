@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:consumo_api_example/config/api_config.dart';
 import 'package:consumo_api_example/models/estudante.dart';
 import 'package:http/http.dart' as http;
 
 class EstudanteService {
-  final String baseUrl =
-      'http://api_example.local/api'; // Substitua pela URL da sua API
+  final String baseUrl = ApiConfig().apiBaseUrl;
 
   Future<List<Estudante>> index() async {
     final response = await http.get(Uri.parse('$baseUrl/estudantes'));
@@ -21,7 +21,7 @@ class EstudanteService {
     await http.post(
       Uri.parse('$baseUrl/estudantes'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(estudante.toJsonEstundante()),
+      body: jsonEncode(estudante.toJsonEstudante()),
     );
   }
 
@@ -29,7 +29,7 @@ class EstudanteService {
     await http.put(
       Uri.parse('$baseUrl/estudantes/${estudante.id}'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(estudante.toJson()),
+      body: jsonEncode(estudante.toJsonEstudante()),
     );
   }
 

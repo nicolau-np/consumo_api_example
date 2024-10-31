@@ -23,7 +23,7 @@ class Estudante {
     };
   }
 
-  Map<String, dynamic> toJsonEstundante() {
+  Map<String, dynamic> toJsonEstudante() {
     return {
       'nome': pessoa.nome,
       'genero': pessoa.genero,
